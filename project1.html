@@ -1,1 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Flip</title>
+  <style>
+    .container-1 {
+      
+      background-color: red;
+      width: 33%;
+      height: 10px;
+    }
+    .container-2 {
+    
+      background-color: blue;
+      width: 33%;
+      height: 10px;
+    }
+    .container-3 {
+      
+      background-color: green;
+      width: 33%;
+      height: 10px;
+    }
+    @font-face {
+      font-family: 'Crystal';
+      src: url('./CrystalSkyAlt.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
+    .custom-font{
+      font-family: 'Crystal';
+      font-size: 45px;
+    }
+    
+
+  </style>
+  <link rel="stylesheet" href="stylesheet.css.liquid" as="style">
+</head>
+<body>
+
+  <button onclick="
+    playGame('heads');
+    ">heads</button>
+
+  <button onclick="
+    playGame('tails');
+  ">tails</button>
+
+  <button onclick="s
+    score.wins = 0;
+    score.losses = 0;
+    localStorage.removeItem('score');
+  ">Reset Score</button>
+
+  <div style="display: flex;">
+    <div class="container-1"></div>
+    <div class="container-2"></div>
+    <div class="container-3"></div>
+  </div>
+  <p class="custom-font">Betsy</p>
+
+  <script>
+
+    let score= JSON.parse(localStorage.getItem('score')) || {wins: 0, losses: 0};
+
+    function playGame(guess) {
+      const randNumber = Math.random();
+      const result = randNumber < 0.5 ? 'heads': 'tails';
+
+      guess == result ? ('You win!', score.wins += 1 ): ('You lose!', score.losses += 1);
+
+      localStorage.setItem('score',JSON.stringify(score))
+
+      alert(`You called ${guess}! The coin landed on ${result}
+ Wins: ${score.wins} Losses: ${score.losses}`);
+
+      console.log(score);
+
+    }
+
+    
+
+    const productNames = [
+   'SaMple',
+   'not',
+   '',
+   '',
+   '',
+   '',
+   '',
+   ''
+];
+
+const productSizes = [
+   '',
+   'sample',
+   '',
+   '',
+   '',
+   '',
+   '',
+   ''
+];
+
+let isSampleOrder = true;
+
+for (let i = 0; i < productNames.length; i++) {
+  const name = productNames[i].toLowerCase().trim();
+  const size = productSizes[i].toLowerCase().trim();
+
+  // Skip completely empty rows
+  if (name === "" && size === "") {
+    continue;
+  }
+
+  const nameValid = name.includes('sample');
+  const sizeValid = size.includes('sample');
+
+  // If neither field contains 'sample', this row is invalid
+  if (!nameValid && !sizeValid) {
+    isSampleOrder = false;
+    break;
+  }
+}
+
+output = {
+  isSampleOrder: isSampleOrder
+};
+
+
+console.log(isSampleOrder);
+
+
+
+
+  </script>
+</body>
+</html>
